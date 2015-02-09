@@ -1,4 +1,3 @@
-#!flask/bin/python
 # -*- coding: utf8 -*-
 
 from coverage import coverage
@@ -11,7 +10,7 @@ cov.start()
 
 import os
 import unittest
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 from library import app, db
