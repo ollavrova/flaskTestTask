@@ -21,7 +21,6 @@ Flask-SQLAlchemy
 
 # auth
 Flask-Login
-Flask-Security
 
 flipflop
 gunicorn

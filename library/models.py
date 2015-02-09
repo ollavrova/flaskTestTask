@@ -16,10 +16,12 @@ class User(db.Model, UserMixin):
         self.set_password(password)
 
     def set_password(self, password):
-        self.password = generate_password_hash(password, salt_length=4)
+        # self.password = generate_password_hash(password, salt_length=4)
+        self.password = password
 
     def check_password(self, passw):
-        return check_password_hash(self.password, passw)
+        # return check_password_hash(self.password, passw)
+        return self.password == passw
 
     def __unicode__(self):
         return '<User %r>' % (self.login)
