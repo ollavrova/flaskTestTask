@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="{{ lang|default("en") }}">
+<head>
+    {% block head_css %}
+        <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" xmlns="http://www.w3.org/1999/html">
+        <link rel="stylesheet" href="{{ url_for('static', filename='libs/bootstrap-dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet"
+        {#              href="{{ url_for('static', filename='libs/bootstrap-dist/css/bootstrap-theme.min.css') }}">#}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% endblock %}
+
+    {% block body %}
+    {% endblock %}
+
+    {% block head %}
+        <script src="{{ url_for('static', filename='libs/jquery-1.11.2.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='libs/bootstrap-dist/js/bootstrap.min.js') }}"></script>
+        {% block head_meta %}
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="">
+            <meta name="author" content="">
+            <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
+        {% endblock %}
+
+        {% block title %}
+            <title>
+                {{ page_title|default(_('Library of Questions')) }}
+            </title>
+        {% endblock %}
+
+        {% block extramedia %}{% endblock %}
+
+    {% endblock %}</head>
+<body class="" {% block body_id %}{% endblock %}>
+{% block page_body %}
+    <div id="wrap">
+
+        <div id="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ url_for('home') }}">Library</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url_for('home') }}">Questions</a></li>
+                            <li><a href="{{ url_for('answers', page=1) }}">Last answers</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if g.user.is_authenticated() %}
+                                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('register') }}">Register</a></li>
+                                <li><a href="{{ url_for('login') }}">Login</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            {% block access_control %}
+            {% endblock %}
+            {% block fullcontent %}
+                <div class="container">
+                    {% include 'flash.html' %}
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+
+<div id="opacityWrapper"></div>
+
+{% block windows %}{% endblock %}
+</body>
+</html>

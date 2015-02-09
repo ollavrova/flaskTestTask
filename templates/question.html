@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h3>Question {{ question.id }} </h3>
+
+        <h2>{{ question.title }}</h2>
+
+        <p class="list-group-item-text">{{ question.text }}</p>
+
+        {% if answers %}
+            <h4>Answers:</h4>
+            <div class="list-group">
+            {% for answer in answers.items %}
+
+                <h4 class="list-group-item-heading">{{ answer.vote }} votes
+                    {% if g.user.is_authenticated() %}
+                        {% if g.user.id != answer.user_id %}
+                            <a href="{{ url_for('voting', id=answer.id, q_id=question.id) }}">
+                                <i class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></i></a>
+                        {% else %}
+                            <i class="glyphicon glyphicon-circle-arrow-up disabled" aria-hidden="true"
+                               onClick="alert('This is your answer. You can not vote for it.')"></i>
+                        {% endif %}
+                    {% endif %}</h4>
+                <p class="list-group-item-text">{{ answer.text }}
+                    <i>{{ answer.timestamp.strftime('%d-%m-%Y %H:%m') }}</i></p>
+            {% endfor %}
+
+            {% if answers.has_prev %}<a href="{{ url_for('answers', page = answers.prev_num) }}"><< Previous Page</a> |
+            {% endif %}
+            Page {{ page }} of {{ answers.pages }}
+            {% if answers.has_next %} | <a href="{{ url_for('answers', page = answers.next_num) }}">Next Page >></a>
+            {% endif %}
+
+        {% else %}
+            <h2>Sorry, there is no answers yet.</h2>
+        {% endif %}
+
+        {% if g.user.is_authenticated() %} </br>
+
+            <form method="post" action="">
+                {{ form.hidden_tag() }}
+                <p><label class="control-label" for="post">{{ _('Say something:') }}</label></p>
+
+                <p>{{ form.text }}</p>
+                {% for error in form.text.errors %}
+                    <span class="help-inline">[{{ error }}!]</span><br>
+                {% endfor %}
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-primary" type="submit" value="{{ _('Post answer') }}">
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+
+        </div>
+{% endblock %}

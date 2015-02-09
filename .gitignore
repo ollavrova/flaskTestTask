@@ -1,0 +1,17 @@
+*.py[co]
+__pycache__
+
+# my
+venv
+*.db
+*.sqlite
+*.cfg
+
+# static
+static
+
+# ide
+.idea
+*.pyc
+.project
+

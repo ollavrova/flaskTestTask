@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>
+        {{ page_title|default(_('Library of Questions')) }}
+    </title>
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h4>Hi, {% if g.user.is_authenticated() %}{{ g.user.login }}{% else %} all{% endif %}!</h4>
+
+        {% if questions %}
+            <ul class="list-group">
+                {% for question in questions.items %}
+                    <li class="list-group-item">
+                        <i>{{ question.timestamp.strftime('%d-%m-%Y %H:%m') }} </i>
+                        {#                        <span class="badge">X answer(s)</span>#}
+                        <a href="{{ url_for('view', id=question.id) }}"> {{ question.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if questions.has_prev %} <a href="{{ url_for('home', page = questions.prev_num) }}"><< Previous Page</a>
+                | {% endif %}
+            Page {{ page }} of {{ questions.pages }}
+            {% if questions.has_next %} | <a href="{{ url_for('home', page = questions.next_num) }}">Next Page >></a>
+            {% endif %}
+
+        {% else %}
+            <h2>Sorry, there is no questions yet.</h2>
+        {% endif %}
+        {% if g.user.is_authenticated() %}
+            <div> </br>
+                <form method="post" action="">
+                    {{ form.hidden_tag() }}
+                    <p><label class="control-label" for="post">{{ _('Ask something:') }}</label></p>
+
+                    <label class="control-label" for="id_title">{{ form.title.name }}</label> {{ form.title }} </br>
+                    {% for error in form.title.errors %}
+                        <span class="help-inline">[{{ error }}!]</span><br>
+                    {% endfor %}
+                    <label class="control-label" for="id_text">{{ form.text.name }}</label> {{ form.text }} </br>
+                    {% for error in form.text.errors %}
+                        <span class="help-inline">[{{ error }}!]</span><br>
+                    {% endfor %}
+                    <div class="control-group">
+                        <div class="controls">
+                            <input class="btn btn-primary" type="submit" value="{{ _('Post') }}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

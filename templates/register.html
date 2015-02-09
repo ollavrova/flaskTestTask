@@ -1,0 +1,41 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="well">
+        <h3>{{ _('Please Register') }}</h3>
+
+        <form class="form" action="" method="post" name="login">
+            {{ form.hidden_tag() }}
+            <div class="control-group">
+                <div class="controls">
+                    <p>{{ form.login.name }} {{ form.login }}</p>
+
+                    <div class="control-group{% if form.errors %} error{% endif %}">
+                        <div class="controls">
+                            {% for error in form.login.errors %}
+                                <span class="help-inline">{{ error }}</span><br>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <p>{{ form.password.name }} {{ form.password }}</p>
+
+                    <div class="control-group{% if form.password.errors %} error{% endif %}">
+                        <div class="controls">
+                            {% for error in form.password.errors %}
+                                <span class="help-inline">{{ error }}</span><br>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {{ link | safe }}
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn btn-primary" type="submit" value="{{ _('Register') }}">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

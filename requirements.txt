@@ -1,0 +1,26 @@
+Flask
+Flask-Script
+Flask-WTF
+Flask-Babel
+SQLAlchemy
+flask-migrate
+# flask-whooshalchemy
+Jinja2
+Markdown
+pytz==2013.9
+werkzeug
+
+#testing
+coverage
+
+# debug in style
+ipdb
+
+# SQLAlchemy
+Flask-SQLAlchemy
+
+# auth
+Flask-Login
+Flask-Security
+
+gunicorn
