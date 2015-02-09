@@ -19,6 +19,9 @@ ipdb
 # SQLAlchemy
 Flask-SQLAlchemy
 
+#Postgres
+psycopg2
+
 # auth
 Flask-Login
 

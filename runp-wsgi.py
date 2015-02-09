@@ -1,5 +1,5 @@
 # # -*- coding: utf-8 -*-
-from flipflop import WSGIServer
+# from flipflop import WSGIServer
 from library import app
 
 if __name__ == '__main__':
