@@ -22,7 +22,7 @@ class TestCase(unittest.TestCase):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-            os.path.join(dirname(abspath(__file__)), 'test.db')
+            os.path.join(dirname(abspath(__file__)), 'test.sqlite')
         db.create_all()
 
     def tearDown(self):
