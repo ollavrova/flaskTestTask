@@ -10,12 +10,12 @@ execfile(activate_this, dict(__file__=activate_this))
 if PROJECT_DIR not in sys.path:
     sys.path.append(PROJECT_DIR)
 
-app = create_app(config='../local.cfg')
-# from flipflop import WSGIServer
+app = create_app(config='../local.cfg', silent=True)
+from flipflop import WSGIServer
 
 
 if __name__ == '__main__':
-    # WSGIServer(app).run()
-    app.run()
+    WSGIServer(app).run()
+    # app.run()
 
 from library.app import app as application

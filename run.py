@@ -1,5 +1,5 @@
 # # -*- coding: utf-8 -*-
-from library import manager, app
+from library.app import manager
 
 manager.run()
 
