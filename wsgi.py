@@ -2,6 +2,7 @@
 from library import create_app
 import os
 import sys
+from config import PROJECT_DIR
 
 activate_this = os.path.join(PROJECT_DIR, 'venv', 'bin', 'activate_this.py')
 execfile(activate_this, dict(__file__=activate_this))
