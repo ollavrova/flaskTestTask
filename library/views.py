@@ -2,7 +2,7 @@
 import datetime
 from flask.ext.babel import gettext
 from flask.ext.login import login_required, logout_user, login_user, current_user
-from library import app, db, lm
+from library.app import app, db, lm
 from flask import render_template, flash, g, url_for, redirect, request, abort
 from library.forms import QuestionForm, LoginForm, RegistrationForm, AnswerForm
 from .models import Question, User, Answer
@@ -66,7 +66,7 @@ def register():
     form = RegistrationForm()
     link = '<p>Already have an account? <a href="' + url_for('login') + '">Click here to log in.</a></p>'
     if form.validate_on_submit():
-        user = User(form.login.data, unicode(form.password))
+        user = User(form.login.data, unicode(form.password.data))
         form.populate_obj(user)
         try:
             db.session.add(user)

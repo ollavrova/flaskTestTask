@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from wtforms import StringField
 from flask.ext.wtf import Form
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired
 from wtforms.widgets import TextArea
-
 from wtforms import fields, validators
-from .models import User, db
+from .models import User
+from app import db
 
 
 class LoginForm(Form):
@@ -19,7 +19,7 @@ class LoginForm(Form):
 
     def validate_password(self, password):
         user = self.get_user()
-        if not user.check_password(self.password.data):
+        if not user.check_password(password):
             raise validators.ValidationError('Invalid password')
 
     def get_user(self):

@@ -6,6 +6,7 @@ venv
 *.db
 *.sqlite
 *.cfg
+local.py
 
 # static
 static
