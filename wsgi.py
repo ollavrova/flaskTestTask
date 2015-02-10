@@ -11,11 +11,11 @@ if PROJECT_DIR not in sys.path:
     sys.path.append(PROJECT_DIR)
 
 app = create_app()
-from flipflop import WSGIServer
+# from flipflop import WSGIServer
 
 
 if __name__ == '__main__':
-    WSGIServer(app).run()
-    # app.run()
+    # WSGIServer(app).run()
+    app.run()
 
 from library.app import app as application
