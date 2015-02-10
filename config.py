@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
 
 DEBUG = True
 
-SQLALCHEMY_DATABASE_URI = 'postgres://dzqkyovdaypqxz:X0B7trV4gruKRC4OxCdbvYNH-x@ec2-174-129-213-103.compute-1.amazonaws.com:5432/de793kf29b1fmv'
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+
+SQLALCHEMY_DATABASE_URI = 'mysql://krocozabr:348348@mysql.server/krocozabr$data'
+
 
 CSRF_ENABLED = True
 SECRET_KEY = 'fghfgjlkl12356f8gdf8fgfh78j9h8h7drferew'
