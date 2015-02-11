@@ -1,5 +1,7 @@
 # # -*- coding: utf-8 -*-
-from library.app import manager
+from library import create_app
 
-manager.run()
+app = create_app()
 
+if __name__ == '__main__':
+    app.run()
