@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.login import UserMixin
 from app import db
-from werkzeug.security import check_password_hash, generate_password_hash
 
 
 class User(db.Model, UserMixin):
@@ -13,15 +12,23 @@ class User(db.Model, UserMixin):
 
     def __init__(self, login, password):
         self.login = login
-        self.set_password(password)
-
-    def set_password(self, password):
-        self.password = generate_password_hash(password, salt_length=4)
-        # self.password = password
+        self.password = password
 
     def check_password(self, passw):
-        return check_password_hash(self.password.data, passw)
-        # return self.password.data == passw
+        return self.password == passw
+
+    # Flask-Login integration
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
 
     def __unicode__(self):
         return '<User %r>' % (self.login)
@@ -38,6 +45,14 @@ class Question(db.Model):
 
     def get_id(self):
         return self.id
+
+    @property
+    def get_user(self):
+        return User.query.get(int(self.user_id))
+
+    @property
+    def get_answers_count(self):
+        return Answer.query.filter(Answer.q_id == self.id).count()
 
     def __unicode__(self):
         return '<Question %d>' % self.id
@@ -59,6 +74,10 @@ class Answer(db.Model):
 
     def get_id(self):
         return self.id
+
+    @property
+    def get_user(self):
+        return User.query.get(int(self.user_id))
 
     def __unicode__(self):
         return '<Answer %d>' % self.id

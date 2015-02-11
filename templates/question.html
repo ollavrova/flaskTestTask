@@ -2,13 +2,13 @@
 
 {% block content %}
     <div class="jumbotron">
-        <h3>Question {{ question.id }} </h3>
+        <h3>Question {{ question.id }} </h3> from {{ question.get_user.login }}
 
         <h2>{{ question.title }}</h2>
 
         <p class="list-group-item-text">{{ question.text }}</p>
 
-        {% if answers %}
+        {% if answers.items %}
             <h4>Answers:</h4>
             <div class="list-group">
             {% for answer in answers.items %}
@@ -24,17 +24,18 @@
                         {% endif %}
                     {% endif %}</h4>
                 <p class="list-group-item-text">{{ answer.text }}
-                    <i>{{ answer.timestamp.strftime('%d-%m-%Y %H:%m') }}</i></p>
+                    <i>{{ answer.timestamp.strftime('%d-%m-%Y %H:%m') }}</i> from {{ answer.get_user.login }}</p>
             {% endfor %}
-
+{% if answers.pages %}
             {% if answers.has_prev %}<a href="{{ url_for('answers', page = answers.prev_num) }}"><< Previous Page</a> |
             {% endif %}
             Page {{ page }} of {{ answers.pages }}
             {% if answers.has_next %} | <a href="{{ url_for('answers', page = answers.next_num) }}">Next Page >></a>
             {% endif %}
+{% endif %}
 
         {% else %}
-            <h2>Sorry, there is no answers yet.</h2>
+            <h4>Sorry, there is no answers yet.</h4>
         {% endif %}
 
         {% if g.user.is_authenticated() %} </br>
