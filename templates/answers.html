@@ -13,16 +13,17 @@
                 {% for answer in answers.items %}
                     <li class="list-group-item">
                         <a href="{{ url_for('view', id=answer.q_id) }}"><span class="badge">for this question</span></a>
-                        {{ answer.text }} <i>at {{ answer.timestamp.strftime('%d-%m-%Y %H:%m') }} </i>
+                        {{ answer.text }} <i>at {{ answer.timestamp.strftime('%d-%m-%Y %H:%m') }} from {{ answer.get_user.login }} </i>
                     </li>
                 {% endfor %}
             </ul>
-
+{% if answers.pages %}
             {% if answers.has_prev %}<a href="{{ url_for('answers', page = answers.prev_num) }}"><< Previous Page</a> |
             {% endif %}
             Page {{ page }} of {{ answers.pages }}
             {% if answers.has_next %} | <a href="{{ url_for('answers', page = answers.next_num) }}">Next Page >></a>
             {% endif %}
+{% endif %}
 
         {% else %}
             <h2>Sorry, there is no answers yet.</h2>
