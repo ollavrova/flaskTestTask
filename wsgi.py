@@ -9,5 +9,3 @@ PROJECT_DIR = u'/home/krocozabr/mysite/flaskTestTask/'
 activate_this = os.path.join(PROJECT_DIR, 'venv', 'bin', 'activate_this.py')
 execfile(activate_this, dict(__file__=activate_this))
 
-if not (PROJECT_DIR in sys.path):
-    sys.path.append(PROJECT_DIR)
