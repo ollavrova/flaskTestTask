@@ -19,7 +19,7 @@ class LoginForm(Form):
 
     def validate_password(self, password):
         user = self.get_user()
-        if not user.check_password(password):
+        if not user.check_password(password.data):
             raise validators.ValidationError('Invalid password')
 
     def get_user(self):
