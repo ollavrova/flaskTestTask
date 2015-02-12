@@ -2,7 +2,7 @@
 import datetime
 from flask.ext.babel import gettext
 from flask.ext.login import login_required, logout_user, login_user, current_user
-from library.app import app, db, lm
+from library import app, db, lm
 from flask import render_template, flash, g, url_for, redirect, request, abort
 from library.forms import QuestionForm, LoginForm, RegistrationForm, AnswerForm
 from .models import Question, User, Answer

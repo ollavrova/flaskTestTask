@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 from wtforms.widgets import TextArea
 from wtforms import fields, validators
 from .models import User
-from app import db
+from library import db
 
 
 class LoginForm(Form):

@@ -69,19 +69,6 @@ def create_app(config=None, app_name='library'):
     return app
 
 
-app = create_app()
 
-db = SQLAlchemy(app)
-db.init_app(app)
-migrate = Migrate(app, db)
-manager = Manager(app)
-manager.add_command('db', MigrateCommand)
-
-babel = Babel(app)
-babel.init_app(app)
-lm = LoginManager()
-lm.init_app(app)
-lm.login_view = 'login'
-lm.login_message = lazy_gettext('Please log in to access this page.')
 
 

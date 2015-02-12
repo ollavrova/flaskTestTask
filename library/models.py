@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.login import UserMixin
-from app import db
+from library import db
 
 
 class User(db.Model, UserMixin):

@@ -1,5 +1,5 @@
 # # -*- coding: utf-8 -*-
-from library.app import manager
+from library import manager
 
 manager.add_option('-c', '--config', dest="config", required=False,
                    help="config file")

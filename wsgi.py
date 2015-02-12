@@ -11,3 +11,7 @@ PROJECT_DIR = u'/home/krocozabr/mysite/flaskTestTask/'
 
 activate_this = '/home/krocozabr/mysite/flaskTestTask/venv/bin/activate_this.py'
 execfile(activate_this, dict(__file__=activate_this))
+
+from flipflop import WSGIServer
+
+WSGIServer.run()
