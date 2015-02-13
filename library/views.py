@@ -5,6 +5,7 @@ from flask.ext.login import login_required, logout_user, login_user, current_use
 from library import app, db, lm
 from flask import render_template, flash, g, url_for, redirect, request, abort
 from library.forms import QuestionForm, LoginForm, RegistrationForm, AnswerForm
+from markupsafe import Markup
 from .models import Question, User, Answer
 
 POSTS_PER_PAGE = 5
@@ -21,8 +22,8 @@ def load_user(user_id):
 def home(page=1):
     form = QuestionForm()
     if form.validate_on_submit():
-        q = Question(title=form.title.data,
-                     text=form.text.data,
+        q = Question(title=Markup.escape(form.title.data),
+                     text=Markup.escape(form.text.data),
                      timestamp=datetime.datetime.utcnow(),
                      user_id=g.user.get_id()
                      )
@@ -47,7 +48,7 @@ def view(id, page=1):
     answers = Answer.query.filter_by(q_id=id).order_by(Answer.timestamp.desc()).paginate(page, POSTS_PER_PAGE, False)
     form = AnswerForm()
     if form.validate_on_submit():
-        answer = Answer(text=form.text.data, q_id=q.id,
+        answer = Answer(text=Markup.escape(form.text.data), q_id=q.id,
                         timestamp=datetime.datetime.utcnow(),
                         user_id=g.user.get_id())
         try:
