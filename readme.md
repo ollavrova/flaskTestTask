@@ -17,7 +17,6 @@
     1. Задать вопрос
     2. Ответить на вопрос
     3. Проголосовать за ответ
-    4.
 
 Задействованные технологии:
 
@@ -28,6 +27,6 @@
     Flask-Login
     Bootstrap
 
-2. Проект доступен онлайн http://krocozabr.pythonanywhere.com/
+Проект доступен онлайн http://krocozabr.pythonanywhere.com/
 
 
