@@ -23,10 +23,32 @@ class TestCase(unittest.TestCase):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
             os.path.join(dirname(abspath(__file__)), 'test.sqlite')
         db.create_all()
+        self.auth = {"username": "test", "password": "123"}
+        self.user = User(login='user',
+                         password='111')
+        self.q = Question(title='hi',
+                          text=u'How are you?',
+                          timestamp=datetime.utcnow(),
+                          user_id=1)
+        self.answer = Answer(text='Good', user_id=1, q_id=1, timestamp=datetime.utcnow())
+        db.session.add(self.user)
+        db.session.add(self.q)
+        db.session.add(self.answer)
+        db.session.commit()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+
+    def test_models(self):
+        self.assertEqual(self.user.login, 'user')
+        self.assertEqual(self.user.password, '111')
+        self.assertEqual(self.q.title, 'hi')
+        self.assertEqual(self.q.text, u'How are you?')
+        self.assertEqual(self.q.user_id, 1)
+        self.assertEqual(self.answer.text, 'Good')
+        self.assertEqual(self.answer.user_id, 1)
+        self.assertEqual(self.answer.q_id, 1)
 
     def test_user(self):
         # create a user
@@ -49,7 +71,7 @@ class TestCase(unittest.TestCase):
 
     def test_answer(self):
         # create an answer
-        u = Answer(text='john know about everything', timestamp=datetime.utcnow())
+        u = Answer(text='john know about everything', timestamp=datetime.utcnow(), q_id=1)
         db.session.add(u)
         db.session.commit()
         assert u.text == 'john know about everything'

@@ -4,9 +4,7 @@ Flask-WTF
 Flask-Babel
 SQLAlchemy
 flask-migrate
-# flask-whooshalchemy
 Jinja2
-Markdown
 pytz==2013.9
 werkzeug
 flask-mysql
@@ -29,5 +27,4 @@ MySQLdb
 # auth
 Flask-Login
 
-flipflop
 gunicorn
